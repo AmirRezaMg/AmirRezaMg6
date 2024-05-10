@@ -1,0 +1,20 @@
+/* en movil*/
+
+@media screen and (max-width:767px){
+    .navbar{
+        display: flex;
+    }
+    .org{
+        display: flex;
+        }
+}
+
+/* en tablet*/
+@media screen and (min-width:767px) and (max-width:990px){
+    .navbar{
+        display: flex;
+    }
+    .org{
+        display: flex;
+    }
+}
