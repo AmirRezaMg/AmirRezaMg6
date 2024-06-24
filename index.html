@@ -1,57 +1,74 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="magnitudPginaweb.css">
+    <title>JS</title>
 </head>
 <body>
 
-<div class="parteInicio">
+    <!--
+    formulario:
+    -->
+
+    <form>
+        <label for="nombre">First name:</label><br>
+        <input type="text" id="nombre" value=""><br>
+        <input type="date" id="fecha"><br>
+        <textarea id="mensaje" name="message" rows="10" cols="30"></textarea>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+     // entrar variables del html a js respecto de id (para empezar a trabajr en js)
+        let miNombre = document.getElementById('nombre');  
+        let miMensaje = document.getElementById('mensaje');
+        let miFecha=document.getElementById('fecha');
+        // entrar formulario (form) a js despues de activar el botun:
+        document.querySelector('form').addEventListener('submit', function(nuevoPagina) {
+         //activar nuevo pagina
+            nuevoPagina.preventDefault();
+            
+            // acceder a los campos desde funcion
+            let nombre1 = miNombre.value;
+            let mensaje1 = miMensaje.value;
+            let fecha1=miFecha.value;
+            //crear objetos
+             let datos = {
+                nombre: nombre1,
+                fecha_2:fecha1,
+                mensaje:mensaje1
+            };
+
+       let sum='';
+            for(let i in datos) {
+                //alert(i+''+datos[i]);
+               
+                document.getElementById('x').innerHTML=sum=sum+datos[i]+"<br>" ;
+            }
+        
+        });
+    </script>
 
 
-<div class="navbar">        
-    <nav>
-        <ul>
-        <li><a href="index.html">inicio</a></li>
-        <li><a href="delegacion.html">Delegados</a></li>
-        <li><a href="derecho.html">Derecho</a></li>
-        <li><a href="deberes.html">Deberes</a></li>
-        <li><a href="organismos.html">organismos publicos</a></li>
-        </ul>
-    </nav>
-</div>
-    
+<!--ver  nombre ,fecha y el texto
+-->
+<p id="x"></p>
+<!--
+guardar resultados en formato pdf
+-->
 
-<div class="inicio">
-    <div class="col">
-      <h1>BienVenido</h1>
-        <p>
-        ¿conoces tus derechos,deberes que tienes en una empresa
-        o  <br> organicmos publicos en españa?<br>
-        si no ,pues aqui es la pagina que puedes cogerte un poco informacion sobre 
-        </p>
-           <button type="boton">
-            <a href="derecho.html" class="b1">Empecamos!</a>
-        </button>
-     </div>
-     <div class="col">
-    <div class="c0 c1">
-     <p><a href="delegacion.html" class="b1">Delegacion</a></p>
-    </div>
-    <div class="c0 c2">
-        <p><a href="derecho.html" class="b1">Derechos</a></p>
-    </div>
-    <div class="c0 c3">  
-        <p><a href="deberes.html" class="b1">Deberes</a></p>
-    </div>  
-    <div class="c0 c4">   
-        <p><a href="organismos.html" class="b1">Organismos</a></p>
-    </div>
-    </div>
- </div>
- </div>
+<button id="generar_pdf">Guardar</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+    document.getElementById('generar_pdf').addEventListener('click', () => {
+        const elemento = document.getElementById('x');
+        html2pdf().from(elemento).save('ejemplo.pdf');
+    });
+</script>
+
+
 
 </body>
 </html>
